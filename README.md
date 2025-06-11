@@ -1,0 +1,1 @@
+This project demonstrates how to control an LED connected to an STM32 microcontroller using UART communication. A custom UART driver is implemented using direct register access (bare-metal programming), without relying on STM32 HAL or CubeMX.
