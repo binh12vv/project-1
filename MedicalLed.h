@@ -14,7 +14,7 @@ typedef enum{
 typedef struct{
 	
 	Led_Type super;
-	LedWavelength_Type wavelenght;
+	LedWavelength_Type wavelength;;
 
 }MedicalLed_Type;
 
@@ -26,5 +26,11 @@ void MedicalLed_ctor(MedicalLed_Type * const me,
 
 LedWavelength_Type MedicalLed_getWavelength(MedicalLed_Type * const me);
 void MedicalLed_setWavelength(MedicalLed_Type * const me ,LedWavelength_Type wavelength);
+
+
+ uint32_t MedicalLed_computeEfficiency( MedicalLed_Type * const me);
+void   MedicalLed_runDiagnostics(MedicalLed_Type const * const me);
+
+
 
 #endif 

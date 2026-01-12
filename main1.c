@@ -1,22 +1,30 @@
 #include "PowerLed.h"
+#include "MedicalLed.h"
 
-PowerLed_Type pled1,pled2;
-
-led_elec_type led1_power;
-led_elec_type led2_power;
 
 int main (void){
 	 
 	USART2_Init();
-    PowerLed_ctor(&pled1,RED,ON,DIAM_5MM,CURR_NORMAL,VOL_NORMAL);
-	  PowerLed_ctor(&pled2,YELLOW,ON,DIAM_7MM,CURR_HIGH,VOL_NORMAL);
-	  
-	led1_power = PowerLed_computePower(&pled1);
+	MedicalLed_Type  mled1;
+	PowerLed_Type pled1;
+	Led_Type      led1;
 	
-	led2_power = PowerLed_computePower(&pled2);
-while(1){
+	Led_ctor(&led1,RED,ON);
+	PowerLed_ctor(&pled1,RED,ON,DIAM_5MM,CURR_NORMAL,VOL_NORMAL);
+	MedicalLed_ctor(&mled1,INFRARED,(LedColor_Type)INFRARED,ON);
+	
+	Led_Type const * sys_leds[] = {&led1,(Led_Type*)&pled1,(Led_Type*)&mled1,(Led_Type*)0};
+  
  
-}
+while(1){
+	
+	//runSystemDiagnostics(sys_leds);
+	
+	computeLedEffs(sys_leds);
+	for(int i=0;i<6000000;i++){}
+	
+ 
+ }
 
 }
 

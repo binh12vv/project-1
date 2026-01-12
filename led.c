@@ -1,7 +1,19 @@
 #include "led.h"
 #include <stdio.h>
 
+static void run_diagnostics(Led_Type const * const me);
+static uint32_t compute_efficiency(Led_Type const * const me);
+	
 void Led_ctor(Led_Type * const me, LedColor_Type _color ,LedState_Type _state ){
+/*Initial virtual table*/
+	static const struct LedVtable vtable={ 
+		
+		&run_diagnostics,
+		&compute_efficiency
+		
+	};
+  me->vptr = &vtable;
+	 
 	me->state   = _state;
 	me->color   = _color;
 		/*Hardware Init */
@@ -117,7 +129,39 @@ printf("The GREEN Led is set ON \n\r");
     break;
 	}
 	 return  me->state;
+}
  
- }
+static void run_diagnostics(Led_Type const * const me){
+	(void)me;
+}
+
+static uint32_t compute_efficiency(Led_Type const * const me){
+	  
+	(void)me;
+		return 0U;
+}
 
 
+/*Polymorphism at work*/
+
+
+void runSystemDiagnostics(Led_Type const *led_modules[]){
+int i;
+	for(i =0;led_modules[i] !=(Led_Type *)0;i++){
+		
+		Led_runDiagnostics_vcall(led_modules[i]);
+		
+}
+
+}
+void computeLedEffs(Led_Type const * led_modules[]){ 
+	
+	
+	int i;
+	  for(i =0;led_modules[i] !=(Led_Type *)0;i++) {
+
+      Led_computeEffi_vcall(led_modules[i]);
+    }			
+ 
+
+}

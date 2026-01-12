@@ -45,4 +45,15 @@ led_elec_type PowerLed_computePower(PowerLed_Type * const me);
 led_elec_type PowerLed_getCurrent(PowerLed_Type * const me);
 led_elec_type PowerLed_getDiameter(PowerLed_Type * const me);
 led_elec_type PowerLed_getVoltage(PowerLed_Type * const me);
+
+
+
+ uint32_t PowerLed_computeEfficiency( PowerLed_Type const * const me);
+ void   PowerLed_runDiagnostics(PowerLed_Type const * const me);
+
+
+
+
+
+
 #endif 
